@@ -220,4 +220,14 @@
         ukaz=0;
       }
     }
+    let ukaz2=0
+    function napoveda(){
+      if(ukaz2==0){
+        document.getElementById("napoveda").style.display="unset";
+        ukaz2=1;
+      }else if(ukaz2==1){
+        document.getElementById("napoveda").style.display="none";
+        ukaz2=0;
+      }
+    }
 

@@ -11,4 +11,8 @@
 .btny{
     display: inline;
 }
+#napoveda{
+    padding: 10px;
+    display: none;
+}
 
