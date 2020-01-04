@@ -4,4 +4,11 @@
     background: url(modreSprites.png)top left no-repeat; 
 
 }
+#vysvetlenie{
+    padding: 10px;
+    display: none;
+}
+.btny{
+    display: inline;
+}
 

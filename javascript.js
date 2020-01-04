@@ -13,7 +13,7 @@
                       canvasX, canvasY, CAR_WIDTH, CAR_HEIGHT);
       }
     
-    let pristup=1;                              //pristup pri klikani  na auticka aby sa nestalo ze kliknem na ine pokial este jazdi nejake pred nim
+    let pristup=0;                              //pristup pri klikani  na auticka aby sa nestalo ze kliknem na ine pokial este jazdi nejake pred nim
 
     function getCursorPosition(canvas, event) { //funkcia kt vykonava klikanie
         
@@ -21,30 +21,28 @@
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
         console.log("x: " + x + " y: " + y);
-        if(((x>=76)&&(x<=106))&&((y>=223)&&(y<=234))&&(pristup==1)){ //ak som klikol na modre
-            pristup=2;
-            console.log(pristup);
+        if(((x>=76)&&(x<=106))&&((y>=223)&&(y<=234))&&(pristup==0)){ //ak som klikol na modre
+            pristup=1;
             spustModre();
+            setTimeout(function(){ pristup=2;console.log(pristup); }, 5000);//povolim pristup na kliknutie na cervene az po prejdeni modreho
         }
+
         if(((x>=173)&&(x<=183))&&((y>=84)&&(y<=111))&&(pristup==2)){// ak  na cervene
-            pristup=3;
-            console.log(pristup);
             spustCervene();
+            setTimeout(function(){ pristup=3;console.log(pristup); }, 5000);//povolim pristup na kliknutie na fialove az po prejdeni cerveneho
+
+        }else if(((x>=173)&&(x<=183))&&((y>=84)&&(y<=111))&&(pristup==0)){//ak na cervene  kliknem ako prve
+          alert("Zle riešenie");
         }
+
         if(((x>=284)&&(x<=311))&&((y>=176)&&(y<=186))&&(pristup==3)){//ak na fialove
-            pristup=1;                                           
+            pristup=4;                                           
             console.log(pristup);
             spustFialove();
-            pristup=4;  
+            setTimeout(function(){ alert("Križovatka je vyriešená správne"); }, 5000);  //vyhodnotenie az po prejdeni posledneho auticka 
+        }else if(((x>=284)&&(x<=311))&&((y>=176)&&(y<=186))&&(pristup==0||pristup==2)){//ak na fialove kliknem  ako prve
+          alert("Zle riešenie");
         }
-        // if(pristup==4){                                           //ak uz vsetky presli a chcem to resetnut
-        //     ctx.clearRect(0, 0, 400, 400);               //vycisti plochu
-        //     drawCrossroad();
-        //     drawFrame(modreAuticko,0,0,70,150);
-        //     drawFrame(cerveneAuticko,0,0,160,80);
-        //     drawFrame(fialoveAuticko,0,0,170,170);
-        //     pristup=1;
-        // }
     };
     
     
@@ -61,7 +59,7 @@
     let fialoveAuticko = new Image();
 
 //-------------------------------------------pridam src
-    modreAuticko.src = 'modreSprites2.png';
+    modreAuticko.src = 'modreSprites.png';
     cerveneAuticko.src = 'redcarSprites.png';
     fialoveAuticko.src = 'fialoveSprites.png';
 
@@ -197,5 +195,28 @@
     
 
 
+    function demo() {
+      spustModre();
+      setTimeout(function(){ spustCervene(); }, 5000);
+      setTimeout(function(){ spustFialove(); }, 10000);
+     }
 
+    function reset(){
+      ctx.clearRect(0, 0, 400, 400);               //vycisti plochu
+      drawCrossroad();
+      drawFrame(modreAuticko,0,0,70,150);
+      drawFrame(cerveneAuticko,0,0,160,80);
+      drawFrame(fialoveAuticko,0,0,170,170);
+      pristup=0;
+    }
+    let ukaz=0;
+    function vysvetlenie(){
+      if(ukaz==0){
+        document.getElementById("vysvetlenie").style.display="unset";
+        ukaz=1;
+      }else if(ukaz==1){
+        document.getElementById("vysvetlenie").style.display="none";
+        ukaz=0;
+      }
+    }
 
