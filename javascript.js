@@ -28,15 +28,16 @@
         }
 
         if(((x>=173)&&(x<=183))&&((y>=84)&&(y<=111))&&(pristup==2)){// ak  na cervene
+            pristup=3
             spustCervene();
-            setTimeout(function(){ pristup=3;console.log(pristup); }, 5000);//povolim pristup na kliknutie na fialove az po prejdeni cerveneho
+            setTimeout(function(){ pristup=4;console.log(pristup); }, 5000);//povolim pristup na kliknutie na fialove az po prejdeni cerveneho
 
         }else if(((x>=173)&&(x<=183))&&((y>=84)&&(y<=111))&&(pristup==0)){//ak na cervene  kliknem ako prve
           alert("Zle riešenie");
         }
 
-        if(((x>=284)&&(x<=311))&&((y>=176)&&(y<=186))&&(pristup==3)){//ak na fialove
-            pristup=4;                                           
+        if(((x>=284)&&(x<=311))&&((y>=176)&&(y<=186))&&(pristup==4)){//ak na fialove
+            pristup=5;                                           
             console.log(pristup);
             spustFialove();
             setTimeout(function(){ alert("Križovatka je vyriešená správne"); }, 5000);  //vyhodnotenie az po prejdeni posledneho auticka 
